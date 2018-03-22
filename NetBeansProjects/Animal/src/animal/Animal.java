@@ -1,49 +1,74 @@
-
 package animal;
 
-public class Animal {    
+public abstract class Animal {
+
     public int Age;
     public String Color;
-    public String Breed;
-   
-    public Animal(int age, String color, String breed){
+    public String Genus;
+    public String Type;
+    public Boolean IsCarnivore;
+
+    public Animal(int age, String color, String genus) {
         this.Age = age;
         this.Color = color;
-        this.Breed = breed;
-        System.out.println("this "+ Breed + " has been created");     
+        this.Genus = genus;
+        System.out.println("An animal has been created");
     }
-    
-    public int getAge(){
+
+    public void setAge(int age) {
+        this.Age = age;
+    }
+
+    public int getAge() {
         int result = this.Age;
         return result;
     }
-    
-    public void setAge(int age){
-        this.Age = age;
+
+    public void setIsCarnivore(boolean isCarnivore) {
+        this.IsCarnivore = isCarnivore;
     }
-    
-    public void eat(){
-        System.out.println("this "+ Breed + " is eating");
+
+    public boolean getIsCarnivore() {
+        boolean result = this.IsCarnivore;
+        return result;
     }
-    
-    public void sleep(){
-        System.out.println("this "+ Breed + " is sleeping");
+
+    public void climbs() {
+        System.out.println("climbing animals are fun");
     }
+
+    public abstract void eat();
+
+    public abstract void sleep();
 
     public static void main(String[] args) {
         // TODO code application logic here
         // all classes inherit from the Object class in java.
         // Object = Superclass, Animal = Subclass
         //Animal animal = new Animal();
-        Dog puddi = new Dog(14, "Orange and White","Brittany", "Puddi" );
-        puddi.eat();
-        puddi.ruff();
-        System.out.println(puddi.getAge());
-        
-        Cat codi = new Cat(5, "black", "siamese", "Stinky", true);
-        codi.sleep();
-        codi.meow();
-        
+        Dog dog1 = new Dog(14, "Orange and White", "Canis", "Brittany", "Puddi");
+        dog1.eat();
+        dog1.ruff();
+        System.out.println(dog1.getAge());
+
+        Cat cat1 = new Cat(5, "black", "Felis", "Stinky", "siamese", true);
+        cat1.sleep();
+        cat1.meow();
+
+        // casting
+        Object dogO = new Dog(5, "Black", "Canis", "Husky", "Blake");
+        Dog dog2 = (Dog) dogO;
+        dog2.setIsCarnivore(true);
+        dog2.ruff();
+
+        //what if?
+        Dog doggy = new Dog(5, "Black", "Canis", "Mutt", "Sgt Stinky");
+        if (doggy instanceof Animal) {
+            Animal animal1 = (Animal) doggy;
+            animal1.sleep();
+        }
+        doggy.run();
+
     }
-    
+
 }
